@@ -2,17 +2,24 @@
 
 Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
-## Scope and Description
+
+# Scope and Description
 
 
 
-## Build and Test environment
+# Build and Test environment
+
+```
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+rustc --version
+rustup update
+cargo
+```
 
 
+# TODO
 
-## TODO
-
-* watch a bunch of videos about embedded rust development
+* watch https://www.youtube.com/@therustybits
 * setup some emulated test environment
 * setup a real test environment with 1 mcu
 * get something blinking
@@ -21,8 +28,14 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 * learn how to transfer code to a library to meet rust ecosystem standards
 
 
+# References
 
-## Notes to my future self in chronological order
+* https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x
+* https://doc.rust-lang.org/book/
+* https://docs.rust-embedded.org/book/index.html
+
+
+# Notes to my future self in chronological order
 
 * you wanted to make an RC lawnmower
 * you wanted cheap motors with enough torque to move the mower up steep hills
@@ -53,4 +66,19 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 * and that's when rust for embedded development was mentioned
 * so you made this github repo to start evaluating rust for hoverboard firmware
 * pitter patter!
+
+* the rust Peripheral Access Crate (PAC)
+** has the addresses for all the peripherals of an MCU
+** Common Microcontroller Software Interface Standard - System View Description (CMSIS-SVD)
+* rust Hardware Abstraction Layer (HAL)
+* Board Support Package??
+** thin layer on HAL, but knows more about some specific boards
+
+* svd2rust ?????? need to make a PAC for mm32spin*
+* make a board support package for each board that doesn't already have one???
+
+
+
+
+
 
