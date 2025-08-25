@@ -1,4 +1,4 @@
-# SplitHoverEsc
+# split-hover-esc
 
 Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
@@ -9,11 +9,22 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
 # Build and Test environment
 
+* Install Rust on Linux or MacOS
+
 ```
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-rustc --version
 rustup update
-cargo
+rustc --version
+```
+
+* Build
+
+```
+git clone https://github.com/rusttick/split-hover-esc.git
+cargo check
+cargo build
+cargo run
+cargo doc --open
 ```
 
 
@@ -73,10 +84,10 @@ cargo
 * rust Hardware Abstraction Layer (HAL)
 * Board Support Package??
 ** thin layer on HAL, but knows more about some specific boards
-
 * svd2rust ?????? need to make a PAC for mm32spin*
 * make a board support package for each board that doesn't already have one???
 
+* cargo: check, build, run, build --release
 
 
 
