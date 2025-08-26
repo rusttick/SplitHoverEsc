@@ -1,28 +1,32 @@
-use rand::Rng;
-use std::cmp::Ordering;
-use std::io;
+fn greater_than_5(x: i32) -> i32 {
+    if x > 5 {
+        1
+    } else {
+        0
+    }
+}
 
 fn main() {
-    let secret_number = rand::rng().random_range(1..=100);
+    const THING_NEVER_CHANGES: u32 = 56;
 
-    println!("Guess the secret  = {secret_number}");
+    println!("the constant is {THING_NEVER_CHANGES}");
 
-    loop {
-        let mut guess = String::new();
+    let mut x = 5;
+    println!("x = {x}");
+    x = 6;
+    println!("x = {x}");
 
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
+    let t = (500, 'c', 3.9);
+    let (num, letter, floater) = t;
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number");
+    let f = t.2;
 
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("too small"),
-            Ordering::Greater => println!("too big"),
-            Ordering::Equal => {
-                println!("You win!!");
-                break;
-            }
-        }
-    }
+    println!("num = {num}, letter = {letter}, floater = {floater}, f is also {f}");
+
+    let ary = [1, 2, 3, 3, 4];
+
+    println!("ary 1 = {}", ary[1]);
+
+    let y = greater_than_5(10);
+    println!("y is {}", y);
 }

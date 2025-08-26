@@ -45,6 +45,13 @@ cargo doc --open
 * https://doc.rust-lang.org/book/
 * https://docs.rust-embedded.org/book/index.html
 
+github search for rust FOC projects:
+
+* https://github.com/calebfletcher/foc
+* https://github.com/Ben-PH/SimpleFOC-rs
+* https://github.com/qff233/FOC
+* https://github.com/kisy/toyfoc
+
 
 # Notes to my future self in chronological order
 
