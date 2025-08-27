@@ -7,17 +7,13 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
 
 
-# Build and Test environment
+# Build and Test Environment
+* the demo project template in the book is deprecated by https://github.com/knurling-rs/app-template
+* otherwise book: https://docs.rust-embedded.org/book/intro/install.html
+* blue pill: https://github.com/stm32-rs/stm32f1xx-hal
 
-* Install Rust on Linux or MacOS
 
-```
-curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-rustup update
-rustc --version
-```
-
-* Build
+Build
 
 ```
 git clone https://github.com/rusttick/split-hover-esc.git
@@ -30,9 +26,10 @@ cargo doc --open
 
 # TODO
 
-* watch https://www.youtube.com/@therustybits
 * setup some emulated test environment
-* setup a real test environment with 1 mcu
+* setup a real test environment with STM32F103C8T6
+** "thumbv7m-none-eabi" ???
+** use stm32f1::stm32f103 ??
 * get something blinking
 * add more emulated and real boards and get them all blinking
 * read other projects and tutorials to determine how to organize portable projects
