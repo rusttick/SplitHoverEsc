@@ -3,51 +3,66 @@
 Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
 
-# Scope and Description
+# Goals
+
+1. drive a hoverboard motor
+  - with the free controllers that came with the hoverboards
+  - with high torque at low speed
+2. find/assemble a framework to write portable rust for mcu's in general
 
 
+# Environment
 
-# Build and Test Environment
-* the demo project template in the book is deprecated by https://github.com/knurling-rs/app-template
-* otherwise book: https://docs.rust-embedded.org/book/intro/install.html
-* blue pill: https://github.com/stm32-rs/stm32f1xx-hal
+Follow the existing guides to setup an embedded development environment in rust:
+
+- the demo project template in the book is deprecated by https://github.com/knurling-rs/app-template
+- otherwise book: https://docs.rust-embedded.org/book/intro/install.html
 
 
-Build
+# Build
 
 ```
 git clone https://github.com/rusttick/split-hover-esc.git
-cargo check
-cargo build
-cargo run
-cargo doc --open
+cargo rb hello
 ```
 
 
 # TODO
 
-* setup some emulated test environment
-* setup a real test environment with STM32F103C8T6
-** "thumbv7m-none-eabi" ???
-** use stm32f1::stm32f103 ??
-* get something blinking
-* add more emulated and real boards and get them all blinking
-* read other projects and tutorials to determine how to organize portable projects
-* learn how to transfer code to a library to meet rust ecosystem standards
++ setup a real test environment with STM32F103C8T6: stm32f1xx-hal blinky.rs example
+- blink the led with embassy
+- blink in the abstract with a separate mcu specific implementation
+- abstract blink esp board
+- abstract blink rp2040 board
+- abstract blink arduino decimila board
+- abstract blink mm32spin05pf
+- abstract blink mm32spin27pf
+- abstract blink gd32e230c8t6
+- setup qemu to emulate some/all of these boards????
+- add more emulated and real boards and get them all blinking
+- read other projects and tutorials to determine how to organize portable projects
+- learn how to transfer code to a library to meet rust ecosystem standards
 
 
 # References
 
-* https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x
-* https://doc.rust-lang.org/book/
-* https://docs.rust-embedded.org/book/index.html
+- https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x
+- https://rust-book.cs.brown.edu ... instead of... https://doc.rust-lang.org/book/
+- https://docs.rust-embedded.org/book/index.html
 
 github search for rust FOC projects:
 
-* https://github.com/calebfletcher/foc
-* https://github.com/Ben-PH/SimpleFOC-rs
-* https://github.com/qff233/FOC
-* https://github.com/kisy/toyfoc
+- needs encoder: https://github.com/calebfletcher/foc
+- https://github.com/Ben-PH/SimpleFOC-rs
+- embassy HAL: https://github.com/qff233/FOC
+- https://github.com/kisy/toyfoc
+
+
+MCU HAL: GD32E230C8T6, mm32spin27pf, mm32spin05pf, fortior fuebk1, f130k6ce82972
+
+- https://github.com/gd32-rust/gd32-rs
+
+
 
 
 # Notes to my future self in chronological order
@@ -80,7 +95,12 @@ github search for rust FOC projects:
 * so you watched videos about open source embedded development on linux
 * and that's when rust for embedded development was mentioned
 * so you made this github repo to start evaluating rust for hoverboard firmware
-* pitter patter!
+* a week later,
+  you were still trying to understand how to use the abstract embedded-hal
+  without directly using the lower level hal implementation like stm321xx-hal
+  and were wondering why there was no recent activity in these projects
+  when you stumbled onto embassy-hal and the embassy project.
+* Can you find an abstraction that works and do tests with several mcu????
 
 * the rust Peripheral Access Crate (PAC)
 ** has the addresses for all the peripherals of an MCU
@@ -92,8 +112,4 @@ github search for rust FOC projects:
 * make a board support package for each board that doesn't already have one???
 
 * cargo: check, build, run, build --release
-
-
-
-
 
