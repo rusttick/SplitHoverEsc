@@ -6,8 +6,8 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 # Goals
 
 1. drive a hoverboard motor
-  - with the free controllers that came with the hoverboards
-  - with high torque at low speed
+   with the free controllers that came with the hoverboards
+   with high torque at low speed
 2. find/assemble a framework to write portable rust for mcu's in general
 
 
@@ -29,19 +29,19 @@ cargo rb hello
 
 # TODO
 
-+ setup a real test environment with STM32F103C8T6: stm32f1xx-hal blinky.rs example
-- blink the led with embassy
-- blink in the abstract with a separate mcu specific implementation
-- abstract blink esp board
-- abstract blink rp2040 board
-- abstract blink arduino decimila board
-- abstract blink mm32spin05pf
-- abstract blink mm32spin27pf
-- abstract blink gd32e230c8t6
-- setup qemu to emulate some/all of these boards????
-- add more emulated and real boards and get them all blinking
-- read other projects and tutorials to determine how to organize portable projects
-- learn how to transfer code to a library to meet rust ecosystem standards
+- [x] setup a real test environment with STM32F103C8T6: stm32f1xx-hal blinky.rs example
+- [ ] blink the led with embassy
+- [ ] blink in the abstract with a separate mcu specific implementation
+- [ ] abstract blink esp board
+- [ ] abstract blink rp2040 board
+- [ ] abstract blink arduino decimila board
+- [ ] abstract blink mm32spin05pf
+- [ ] abstract blink mm32spin27pf
+- [ ] abstract blink gd32e230c8t6
+- [ ] setup qemu to emulate some/all of these boards????
+- [ ] add more emulated and real boards and get them all blinking
+- [ ] read other projects and tutorials to determine how to organize portable projects
+- [ ] learn how to transfer code to a library to meet rust ecosystem standards
 
 
 # References
