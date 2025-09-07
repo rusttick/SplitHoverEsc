@@ -6,8 +6,8 @@ Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 # Goals
 
 1. drive a hoverboard motor
-   with the free controllers that came with the hoverboards
-   with high torque at low speed
+   a. with the free controllers that came with the hoverboards
+   b. with high torque at low speed
 2. find/assemble a framework to write portable rust for mcu's in general
 
 
