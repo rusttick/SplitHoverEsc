@@ -17,6 +17,9 @@ Follow the existing guides to setup an embedded development environment in rust:
 
 - the demo project template in the book is deprecated by https://github.com/knurling-rs/app-template
 - otherwise book: https://docs.rust-embedded.org/book/intro/install.html
+- embassy hello world: https://github.com/embassy-rs/embassy/blob/main/examples/stm32f1/src/bin/blinky.rs
+- embassy... something about sleep requires "probe-rs --connect-under-reset" for stm32f103
+  make sure your st link has a working nrst pin. mine did not.
 
 
 # Build
@@ -30,7 +33,8 @@ cargo rb hello
 # TODO
 
 - [x] setup a real test environment with STM32F103C8T6: stm32f1xx-hal blinky.rs example
-- [ ] blink the led with embassy
+- [x] blink the led with https://github.com/embassy-rs/embassy/blob/main/examples/stm32f1/src/bin/blinky.rs
+- [ ] add button push with https://github.com/theembeddedrustacean/learn-stm32f4-rs
 - [ ] blink in the abstract with a separate mcu specific implementation
 - [ ] abstract blink esp board
 - [ ] abstract blink rp2040 board
@@ -49,6 +53,9 @@ cargo rb hello
 - https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x
 - https://rust-book.cs.brown.edu ... instead of... https://doc.rust-lang.org/book/
 - https://docs.rust-embedded.org/book/index.html
+- https://doc.rust-lang.org/stable/rust-by-example/
+- https://tourofrust.com
+- embassy-boot: https://blog.drogue.io/firmware-updates-part-1/
 
 github search for rust FOC projects:
 

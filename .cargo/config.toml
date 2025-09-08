@@ -1,6 +1,6 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
 
-runner = ["probe-rs", "run", "--chip", "STM32F103C8", "--log-format=oneline"]
+runner = ["probe-rs", "run", "--chip", "STM32F103C8", "--connect-under-reset", "--log-format=oneline"]
 
 rustflags = [
   "-C", "linker=flip-link",
