@@ -1,50 +1,38 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    uid1: Uid1,
-    uid2: Uid2,
-    uid3: Uid3,
-    uid4: Uid4,
+#[doc = "DEVICE"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Device {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - Configuration register"]
+unsafe impl Send for Device {}
+unsafe impl Sync for Device {}
+impl Device {
     #[inline(always)]
-    pub const fn uid1(&self) -> &Uid1 {
-        &self.uid1
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
     }
-    #[doc = "0x02 - Configuration register"]
     #[inline(always)]
-    pub const fn uid2(&self) -> &Uid2 {
-        &self.uid2
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
     }
-    #[doc = "0x04 - Configuration register"]
+    #[doc = "Configuration register"]
     #[inline(always)]
-    pub const fn uid3(&self) -> &Uid3 {
-        &self.uid3
+    pub const fn uid1(self) -> crate::common::Reg<regs::Uid1, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "0x08 - Configuration register"]
+    #[doc = "Configuration register"]
     #[inline(always)]
-    pub const fn uid4(&self) -> &Uid4 {
-        &self.uid4
+    pub const fn uid2(self) -> crate::common::Reg<regs::Uid2, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x02usize) as _) }
+    }
+    #[doc = "Configuration register"]
+    #[inline(always)]
+    pub const fn uid3(self) -> crate::common::Reg<regs::Uid3, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+    }
+    #[doc = "Configuration register"]
+    #[inline(always)]
+    pub const fn uid4(self) -> crate::common::Reg<regs::Uid4, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
     }
 }
-#[doc = "UID1 (r) register accessor: Configuration register\n\nYou can [`read`](crate::Reg::read) this register and get [`uid1::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@uid1`] module"]
-#[doc(alias = "UID1")]
-pub type Uid1 = crate::Reg<uid1::Uid1Spec>;
-#[doc = "Configuration register"]
-pub mod uid1;
-#[doc = "UID2 (r) register accessor: Configuration register\n\nYou can [`read`](crate::Reg::read) this register and get [`uid2::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@uid2`] module"]
-#[doc(alias = "UID2")]
-pub type Uid2 = crate::Reg<uid2::Uid2Spec>;
-#[doc = "Configuration register"]
-pub mod uid2;
-#[doc = "UID3 (r) register accessor: Configuration register\n\nYou can [`read`](crate::Reg::read) this register and get [`uid3::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@uid3`] module"]
-#[doc(alias = "UID3")]
-pub type Uid3 = crate::Reg<uid3::Uid3Spec>;
-#[doc = "Configuration register"]
-pub mod uid3;
-#[doc = "UID4 (r) register accessor: Configuration register\n\nYou can [`read`](crate::Reg::read) this register and get [`uid4::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@uid4`] module"]
-#[doc(alias = "UID4")]
-pub type Uid4 = crate::Reg<uid4::Uid4Spec>;
-#[doc = "Configuration register"]
-pub mod uid4;
+pub mod regs;

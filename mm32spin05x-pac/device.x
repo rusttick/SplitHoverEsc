@@ -7,9 +7,9 @@ PROVIDE(EXTI0_1 = DefaultHandler);
 PROVIDE(EXTI2_3 = DefaultHandler);
 PROVIDE(EXTI4_15 = DefaultHandler);
 PROVIDE(HWDIV = DefaultHandler);
-PROVIDE(DMA1_Channel1 = DefaultHandler);
-PROVIDE(DMA1_Channel2_3 = DefaultHandler);
-PROVIDE(DMA1_Channel4_5 = DefaultHandler);
+PROVIDE(DMA1_CHANNEL1 = DefaultHandler);
+PROVIDE(DMA1_CHANNEL2_3 = DefaultHandler);
+PROVIDE(DMA1_CHANNEL4_5 = DefaultHandler);
 PROVIDE(ADC_COMP = DefaultHandler);
 PROVIDE(TIM1_BRK_UP_TRG_COM = DefaultHandler);
 PROVIDE(TIM1_CC = DefaultHandler);
@@ -23,4 +23,3 @@ PROVIDE(SPI1 = DefaultHandler);
 PROVIDE(SPI2 = DefaultHandler);
 PROVIDE(UART1 = DefaultHandler);
 PROVIDE(UART2 = DefaultHandler);
-

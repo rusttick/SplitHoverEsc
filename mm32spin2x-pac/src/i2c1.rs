@@ -1,362 +1,178 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    cr: Cr,
-    tar: Tar,
-    sar: Sar,
-    _reserved3: [u8; 0x04],
-    dr: Dr,
-    sshr: Sshr,
-    sslr: Sslr,
-    fshr: Fshr,
-    fslr: Fslr,
-    _reserved8: [u8; 0x08],
-    isr: Isr,
-    imr: Imr,
-    rawisr: Rawisr,
-    rxtlr: Rxtlr,
-    txtlr: Txtlr,
-    icr: Icr,
-    rx_under: RxUnder,
-    rx_over: RxOver,
-    tx_over: TxOver,
-    rd_req: RdReq,
-    tx_abrt: TxAbrt,
-    rx_done: RxDone,
-    activ: Activ,
-    stop: Stop,
-    start: Start,
-    gc: Gc,
-    enr: Enr,
-    sr: Sr,
-    txflr: Txflr,
-    rxflr: Rxflr,
-    hold: Hold,
-    _reserved29: [u8; 0x08],
-    dma: Dma,
-    _reserved30: [u8; 0x08],
-    setup: Setup,
-    gcr: Gcr,
+#[doc = "Inter integrated circuit"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct I2c1 {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - Control Register"]
+unsafe impl Send for I2c1 {}
+unsafe impl Sync for I2c1 {}
+impl I2c1 {
     #[inline(always)]
-    pub const fn cr(&self) -> &Cr {
-        &self.cr
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
     }
-    #[doc = "0x04 - Target Register"]
     #[inline(always)]
-    pub const fn tar(&self) -> &Tar {
-        &self.tar
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
     }
-    #[doc = "0x08 - Slave Address Register"]
+    #[doc = "Control Register"]
     #[inline(always)]
-    pub const fn sar(&self) -> &Sar {
-        &self.sar
+    pub const fn cr(self) -> crate::common::Reg<regs::Cr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "0x10 - Data Command Register"]
+    #[doc = "Target Register"]
     #[inline(always)]
-    pub const fn dr(&self) -> &Dr {
-        &self.dr
+    pub const fn tar(self) -> crate::common::Reg<regs::Tar, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
-    #[doc = "0x14 - SCL High Period Count for Std. Speed Register"]
+    #[doc = "Slave Address Register"]
     #[inline(always)]
-    pub const fn sshr(&self) -> &Sshr {
-        &self.sshr
+    pub const fn sar(self) -> crate::common::Reg<regs::Sar, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
     }
-    #[doc = "0x18 - SCL Low Period Count for Std. Speed Register"]
+    #[doc = "Data Command Register"]
     #[inline(always)]
-    pub const fn sslr(&self) -> &Sslr {
-        &self.sslr
+    pub const fn dr(self) -> crate::common::Reg<regs::Dr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
     }
-    #[doc = "0x1c - SCL High Period Count for Fast Speed Register"]
+    #[doc = "SCL High Period Count for Std. Speed Register"]
     #[inline(always)]
-    pub const fn fshr(&self) -> &Fshr {
-        &self.fshr
+    pub const fn sshr(self) -> crate::common::Reg<regs::Sshr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x14usize) as _) }
     }
-    #[doc = "0x20 - SCL Low Period Count for Fast Speed Register"]
+    #[doc = "SCL Low Period Count for Std. Speed Register"]
     #[inline(always)]
-    pub const fn fslr(&self) -> &Fslr {
-        &self.fslr
+    pub const fn sslr(self) -> crate::common::Reg<regs::Sslr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x18usize) as _) }
     }
-    #[doc = "0x2c - Interrupt Status Register"]
+    #[doc = "SCL High Period Count for Fast Speed Register"]
     #[inline(always)]
-    pub const fn isr(&self) -> &Isr {
-        &self.isr
+    pub const fn fshr(self) -> crate::common::Reg<regs::Fshr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x1cusize) as _) }
     }
-    #[doc = "0x30 - Interrupt Mask Register"]
+    #[doc = "SCL Low Period Count for Fast Speed Register"]
     #[inline(always)]
-    pub const fn imr(&self) -> &Imr {
-        &self.imr
+    pub const fn fslr(self) -> crate::common::Reg<regs::Fslr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x20usize) as _) }
     }
-    #[doc = "0x34 - RAW Interrupt Status Register"]
+    #[doc = "Interrupt Status Register"]
     #[inline(always)]
-    pub const fn rawisr(&self) -> &Rawisr {
-        &self.rawisr
+    pub const fn isr(self) -> crate::common::Reg<regs::Isr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x2cusize) as _) }
     }
-    #[doc = "0x38 - Receive FIFO Threshold Level Register"]
+    #[doc = "Interrupt Mask Register"]
     #[inline(always)]
-    pub const fn rxtlr(&self) -> &Rxtlr {
-        &self.rxtlr
+    pub const fn imr(self) -> crate::common::Reg<regs::Imr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x30usize) as _) }
     }
-    #[doc = "0x3c - Transmit FIFO Threshold Level Register"]
+    #[doc = "RAW Interrupt Status Register"]
     #[inline(always)]
-    pub const fn txtlr(&self) -> &Txtlr {
-        &self.txtlr
+    pub const fn rawisr(self) -> crate::common::Reg<regs::Rawisr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x34usize) as _) }
     }
-    #[doc = "0x40 - Clear All Interrupt Register"]
+    #[doc = "Receive FIFO Threshold Level Register"]
     #[inline(always)]
-    pub const fn icr(&self) -> &Icr {
-        &self.icr
+    pub const fn rxtlr(self) -> crate::common::Reg<regs::Rxtlr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x38usize) as _) }
     }
-    #[doc = "0x44 - Clear RX_UNDER Interrupt Register"]
+    #[doc = "Transmit FIFO Threshold Level Register"]
     #[inline(always)]
-    pub const fn rx_under(&self) -> &RxUnder {
-        &self.rx_under
+    pub const fn txtlr(self) -> crate::common::Reg<regs::Txtlr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x3cusize) as _) }
     }
-    #[doc = "0x48 - Clear RX_OVER Interrupt Register"]
+    #[doc = "Clear All Interrupt Register"]
     #[inline(always)]
-    pub const fn rx_over(&self) -> &RxOver {
-        &self.rx_over
+    pub const fn icr(self) -> crate::common::Reg<regs::Icr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x40usize) as _) }
     }
-    #[doc = "0x4c - Clear TX_OVER Interrupt Register"]
+    #[doc = "Clear RX_UNDER Interrupt Register"]
     #[inline(always)]
-    pub const fn tx_over(&self) -> &TxOver {
-        &self.tx_over
+    pub const fn rx_under(self) -> crate::common::Reg<regs::RxUnder, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x44usize) as _) }
     }
-    #[doc = "0x50 - Clear RD_REQ Interrupt Register"]
+    #[doc = "Clear RX_OVER Interrupt Register"]
     #[inline(always)]
-    pub const fn rd_req(&self) -> &RdReq {
-        &self.rd_req
+    pub const fn rx_over(self) -> crate::common::Reg<regs::RxOver, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x48usize) as _) }
     }
-    #[doc = "0x54 - Clear TX_ABRT Interrupt Register"]
+    #[doc = "Clear TX_OVER Interrupt Register"]
     #[inline(always)]
-    pub const fn tx_abrt(&self) -> &TxAbrt {
-        &self.tx_abrt
+    pub const fn tx_over(self) -> crate::common::Reg<regs::TxOver, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x4cusize) as _) }
     }
-    #[doc = "0x58 - Clear RX_DONE Interrupt Register"]
+    #[doc = "Clear RD_REQ Interrupt Register"]
     #[inline(always)]
-    pub const fn rx_done(&self) -> &RxDone {
-        &self.rx_done
+    pub const fn rd_req(self) -> crate::common::Reg<regs::RdReq, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x50usize) as _) }
     }
-    #[doc = "0x5c - Clear ACTIVITY Interrupt Register"]
+    #[doc = "Clear TX_ABRT Interrupt Register"]
     #[inline(always)]
-    pub const fn activ(&self) -> &Activ {
-        &self.activ
+    pub const fn tx_abrt(self) -> crate::common::Reg<regs::TxAbrt, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x54usize) as _) }
     }
-    #[doc = "0x60 - Clear STOP_DET Interrupt Register"]
+    #[doc = "Clear RX_DONE Interrupt Register"]
     #[inline(always)]
-    pub const fn stop(&self) -> &Stop {
-        &self.stop
+    pub const fn rx_done(self) -> crate::common::Reg<regs::RxDone, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x58usize) as _) }
     }
-    #[doc = "0x64 - Clear START_DET Interrupt Register"]
+    #[doc = "Clear ACTIVITY Interrupt Register"]
     #[inline(always)]
-    pub const fn start(&self) -> &Start {
-        &self.start
+    pub const fn activ(self) -> crate::common::Reg<regs::Activ, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x5cusize) as _) }
     }
-    #[doc = "0x68 - Clear GEN_CALL Interrupt Register"]
+    #[doc = "Clear STOP_DET Interrupt Register"]
     #[inline(always)]
-    pub const fn gc(&self) -> &Gc {
-        &self.gc
+    pub const fn stop(self) -> crate::common::Reg<regs::Stop, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x60usize) as _) }
     }
-    #[doc = "0x6c - Enable Register"]
+    #[doc = "Clear START_DET Interrupt Register"]
     #[inline(always)]
-    pub const fn enr(&self) -> &Enr {
-        &self.enr
+    pub const fn start(self) -> crate::common::Reg<regs::Start, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x64usize) as _) }
     }
-    #[doc = "0x70 - Status Register"]
+    #[doc = "Clear GEN_CALL Interrupt Register"]
     #[inline(always)]
-    pub const fn sr(&self) -> &Sr {
-        &self.sr
+    pub const fn gc(self) -> crate::common::Reg<regs::Gc, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x68usize) as _) }
     }
-    #[doc = "0x74 - Transmit FIFO Level Register"]
+    #[doc = "Enable Register"]
     #[inline(always)]
-    pub const fn txflr(&self) -> &Txflr {
-        &self.txflr
+    pub const fn enr(self) -> crate::common::Reg<regs::Enr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x6cusize) as _) }
     }
-    #[doc = "0x78 - Receive FIFO Level Register"]
+    #[doc = "Status Register"]
     #[inline(always)]
-    pub const fn rxflr(&self) -> &Rxflr {
-        &self.rxflr
+    pub const fn sr(self) -> crate::common::Reg<regs::Sr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x70usize) as _) }
     }
-    #[doc = "0x7c - SDA Hold Time Register"]
+    #[doc = "Transmit FIFO Level Register"]
     #[inline(always)]
-    pub const fn hold(&self) -> &Hold {
-        &self.hold
+    pub const fn txflr(self) -> crate::common::Reg<regs::Txflr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x74usize) as _) }
     }
-    #[doc = "0x88 - DMA Control Register"]
+    #[doc = "Receive FIFO Level Register"]
     #[inline(always)]
-    pub const fn dma(&self) -> &Dma {
-        &self.dma
+    pub const fn rxflr(self) -> crate::common::Reg<regs::Rxflr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x78usize) as _) }
     }
-    #[doc = "0x94 - SDA Setup Time Register"]
+    #[doc = "SDA Hold Time Register"]
     #[inline(always)]
-    pub const fn setup(&self) -> &Setup {
-        &self.setup
+    pub const fn hold(self) -> crate::common::Reg<regs::Hold, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x7cusize) as _) }
     }
-    #[doc = "0x98 - ACK General Call Register"]
+    #[doc = "DMA Control Register"]
     #[inline(always)]
-    pub const fn gcr(&self) -> &Gcr {
-        &self.gcr
+    pub const fn dma(self) -> crate::common::Reg<regs::Dma, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x88usize) as _) }
+    }
+    #[doc = "SDA Setup Time Register"]
+    #[inline(always)]
+    pub const fn setup(self) -> crate::common::Reg<regs::Setup, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x94usize) as _) }
+    }
+    #[doc = "ACK General Call Register"]
+    #[inline(always)]
+    pub const fn gcr(self) -> crate::common::Reg<regs::Gcr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x98usize) as _) }
     }
 }
-#[doc = "CR (rw) register accessor: Control Register\n\nYou can [`read`](crate::Reg::read) this register and get [`cr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`cr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@cr`] module"]
-#[doc(alias = "CR")]
-pub type Cr = crate::Reg<cr::CrSpec>;
-#[doc = "Control Register"]
-pub mod cr;
-#[doc = "TAR (rw) register accessor: Target Register\n\nYou can [`read`](crate::Reg::read) this register and get [`tar::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`tar::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@tar`] module"]
-#[doc(alias = "TAR")]
-pub type Tar = crate::Reg<tar::TarSpec>;
-#[doc = "Target Register"]
-pub mod tar;
-#[doc = "SAR (rw) register accessor: Slave Address Register\n\nYou can [`read`](crate::Reg::read) this register and get [`sar::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`sar::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@sar`] module"]
-#[doc(alias = "SAR")]
-pub type Sar = crate::Reg<sar::SarSpec>;
-#[doc = "Slave Address Register"]
-pub mod sar;
-#[doc = "DR (rw) register accessor: Data Command Register\n\nYou can [`read`](crate::Reg::read) this register and get [`dr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`dr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@dr`] module"]
-#[doc(alias = "DR")]
-pub type Dr = crate::Reg<dr::DrSpec>;
-#[doc = "Data Command Register"]
-pub mod dr;
-#[doc = "SSHR (rw) register accessor: SCL High Period Count for Std. Speed Register\n\nYou can [`read`](crate::Reg::read) this register and get [`sshr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`sshr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@sshr`] module"]
-#[doc(alias = "SSHR")]
-pub type Sshr = crate::Reg<sshr::SshrSpec>;
-#[doc = "SCL High Period Count for Std. Speed Register"]
-pub mod sshr;
-#[doc = "SSLR (rw) register accessor: SCL Low Period Count for Std. Speed Register\n\nYou can [`read`](crate::Reg::read) this register and get [`sslr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`sslr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@sslr`] module"]
-#[doc(alias = "SSLR")]
-pub type Sslr = crate::Reg<sslr::SslrSpec>;
-#[doc = "SCL Low Period Count for Std. Speed Register"]
-pub mod sslr;
-#[doc = "FSHR (rw) register accessor: SCL High Period Count for Fast Speed Register\n\nYou can [`read`](crate::Reg::read) this register and get [`fshr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`fshr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@fshr`] module"]
-#[doc(alias = "FSHR")]
-pub type Fshr = crate::Reg<fshr::FshrSpec>;
-#[doc = "SCL High Period Count for Fast Speed Register"]
-pub mod fshr;
-#[doc = "FSLR (rw) register accessor: SCL Low Period Count for Fast Speed Register\n\nYou can [`read`](crate::Reg::read) this register and get [`fslr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`fslr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@fslr`] module"]
-#[doc(alias = "FSLR")]
-pub type Fslr = crate::Reg<fslr::FslrSpec>;
-#[doc = "SCL Low Period Count for Fast Speed Register"]
-pub mod fslr;
-#[doc = "ISR (r) register accessor: Interrupt Status Register\n\nYou can [`read`](crate::Reg::read) this register and get [`isr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@isr`] module"]
-#[doc(alias = "ISR")]
-pub type Isr = crate::Reg<isr::IsrSpec>;
-#[doc = "Interrupt Status Register"]
-pub mod isr;
-#[doc = "IMR (rw) register accessor: Interrupt Mask Register\n\nYou can [`read`](crate::Reg::read) this register and get [`imr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`imr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@imr`] module"]
-#[doc(alias = "IMR")]
-pub type Imr = crate::Reg<imr::ImrSpec>;
-#[doc = "Interrupt Mask Register"]
-pub mod imr;
-#[doc = "RAWISR (r) register accessor: RAW Interrupt Status Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rawisr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rawisr`] module"]
-#[doc(alias = "RAWISR")]
-pub type Rawisr = crate::Reg<rawisr::RawisrSpec>;
-#[doc = "RAW Interrupt Status Register"]
-pub mod rawisr;
-#[doc = "RXTLR (r) register accessor: Receive FIFO Threshold Level Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rxtlr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rxtlr`] module"]
-#[doc(alias = "RXTLR")]
-pub type Rxtlr = crate::Reg<rxtlr::RxtlrSpec>;
-#[doc = "Receive FIFO Threshold Level Register"]
-pub mod rxtlr;
-#[doc = "TXTLR (r) register accessor: Transmit FIFO Threshold Level Register\n\nYou can [`read`](crate::Reg::read) this register and get [`txtlr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@txtlr`] module"]
-#[doc(alias = "TXTLR")]
-pub type Txtlr = crate::Reg<txtlr::TxtlrSpec>;
-#[doc = "Transmit FIFO Threshold Level Register"]
-pub mod txtlr;
-#[doc = "ICR (r) register accessor: Clear All Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`icr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@icr`] module"]
-#[doc(alias = "ICR")]
-pub type Icr = crate::Reg<icr::IcrSpec>;
-#[doc = "Clear All Interrupt Register"]
-pub mod icr;
-#[doc = "RX_UNDER (r) register accessor: Clear RX_UNDER Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rx_under::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rx_under`] module"]
-#[doc(alias = "RX_UNDER")]
-pub type RxUnder = crate::Reg<rx_under::RxUnderSpec>;
-#[doc = "Clear RX_UNDER Interrupt Register"]
-pub mod rx_under;
-#[doc = "RX_OVER (r) register accessor: Clear RX_OVER Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rx_over::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rx_over`] module"]
-#[doc(alias = "RX_OVER")]
-pub type RxOver = crate::Reg<rx_over::RxOverSpec>;
-#[doc = "Clear RX_OVER Interrupt Register"]
-pub mod rx_over;
-#[doc = "TX_OVER (r) register accessor: Clear TX_OVER Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`tx_over::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@tx_over`] module"]
-#[doc(alias = "TX_OVER")]
-pub type TxOver = crate::Reg<tx_over::TxOverSpec>;
-#[doc = "Clear TX_OVER Interrupt Register"]
-pub mod tx_over;
-#[doc = "RD_REQ (r) register accessor: Clear RD_REQ Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rd_req::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rd_req`] module"]
-#[doc(alias = "RD_REQ")]
-pub type RdReq = crate::Reg<rd_req::RdReqSpec>;
-#[doc = "Clear RD_REQ Interrupt Register"]
-pub mod rd_req;
-#[doc = "TX_ABRT (r) register accessor: Clear TX_ABRT Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`tx_abrt::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@tx_abrt`] module"]
-#[doc(alias = "TX_ABRT")]
-pub type TxAbrt = crate::Reg<tx_abrt::TxAbrtSpec>;
-#[doc = "Clear TX_ABRT Interrupt Register"]
-pub mod tx_abrt;
-#[doc = "RX_DONE (r) register accessor: Clear RX_DONE Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rx_done::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rx_done`] module"]
-#[doc(alias = "RX_DONE")]
-pub type RxDone = crate::Reg<rx_done::RxDoneSpec>;
-#[doc = "Clear RX_DONE Interrupt Register"]
-pub mod rx_done;
-#[doc = "ACTIV (r) register accessor: Clear ACTIVITY Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`activ::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@activ`] module"]
-#[doc(alias = "ACTIV")]
-pub type Activ = crate::Reg<activ::ActivSpec>;
-#[doc = "Clear ACTIVITY Interrupt Register"]
-pub mod activ;
-#[doc = "STOP (r) register accessor: Clear STOP_DET Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`stop::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@stop`] module"]
-#[doc(alias = "STOP")]
-pub type Stop = crate::Reg<stop::StopSpec>;
-#[doc = "Clear STOP_DET Interrupt Register"]
-pub mod stop;
-#[doc = "START (r) register accessor: Clear START_DET Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`start::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@start`] module"]
-#[doc(alias = "START")]
-pub type Start = crate::Reg<start::StartSpec>;
-#[doc = "Clear START_DET Interrupt Register"]
-pub mod start;
-#[doc = "GC (r) register accessor: Clear GEN_CALL Interrupt Register\n\nYou can [`read`](crate::Reg::read) this register and get [`gc::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@gc`] module"]
-#[doc(alias = "GC")]
-pub type Gc = crate::Reg<gc::GcSpec>;
-#[doc = "Clear GEN_CALL Interrupt Register"]
-pub mod gc;
-#[doc = "ENR (rw) register accessor: Enable Register\n\nYou can [`read`](crate::Reg::read) this register and get [`enr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`enr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@enr`] module"]
-#[doc(alias = "ENR")]
-pub type Enr = crate::Reg<enr::EnrSpec>;
-#[doc = "Enable Register"]
-pub mod enr;
-#[doc = "SR (r) register accessor: Status Register\n\nYou can [`read`](crate::Reg::read) this register and get [`sr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@sr`] module"]
-#[doc(alias = "SR")]
-pub type Sr = crate::Reg<sr::SrSpec>;
-#[doc = "Status Register"]
-pub mod sr;
-#[doc = "TXFLR (r) register accessor: Transmit FIFO Level Register\n\nYou can [`read`](crate::Reg::read) this register and get [`txflr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@txflr`] module"]
-#[doc(alias = "TXFLR")]
-pub type Txflr = crate::Reg<txflr::TxflrSpec>;
-#[doc = "Transmit FIFO Level Register"]
-pub mod txflr;
-#[doc = "RXFLR (r) register accessor: Receive FIFO Level Register\n\nYou can [`read`](crate::Reg::read) this register and get [`rxflr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rxflr`] module"]
-#[doc(alias = "RXFLR")]
-pub type Rxflr = crate::Reg<rxflr::RxflrSpec>;
-#[doc = "Receive FIFO Level Register"]
-pub mod rxflr;
-#[doc = "HOLD (r) register accessor: SDA Hold Time Register\n\nYou can [`read`](crate::Reg::read) this register and get [`hold::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@hold`] module"]
-#[doc(alias = "HOLD")]
-pub type Hold = crate::Reg<hold::HoldSpec>;
-#[doc = "SDA Hold Time Register"]
-pub mod hold;
-#[doc = "DMA (rw) register accessor: DMA Control Register\n\nYou can [`read`](crate::Reg::read) this register and get [`dma::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`dma::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@dma`] module"]
-#[doc(alias = "DMA")]
-pub type Dma = crate::Reg<dma::DmaSpec>;
-#[doc = "DMA Control Register"]
-pub mod dma;
-#[doc = "SETUP (rw) register accessor: SDA Setup Time Register\n\nYou can [`read`](crate::Reg::read) this register and get [`setup::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`setup::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@setup`] module"]
-#[doc(alias = "SETUP")]
-pub type Setup = crate::Reg<setup::SetupSpec>;
-#[doc = "SDA Setup Time Register"]
-pub mod setup;
-#[doc = "GCR (rw) register accessor: ACK General Call Register\n\nYou can [`read`](crate::Reg::read) this register and get [`gcr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`gcr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@gcr`] module"]
-#[doc(alias = "GCR")]
-pub type Gcr = crate::Reg<gcr::GcrSpec>;
-#[doc = "ACK General Call Register"]
-pub mod gcr;
+pub mod regs;

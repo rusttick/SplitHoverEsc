@@ -1,28 +1,28 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    cr: Cr,
-    csr: Csr,
+#[doc = "Power control"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Pwr {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - CR"]
+unsafe impl Send for Pwr {}
+unsafe impl Sync for Pwr {}
+impl Pwr {
     #[inline(always)]
-    pub const fn cr(&self) -> &Cr {
-        &self.cr
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
     }
-    #[doc = "0x04 - CSR"]
     #[inline(always)]
-    pub const fn csr(&self) -> &Csr {
-        &self.csr
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
+    }
+    #[doc = "CR"]
+    #[inline(always)]
+    pub const fn cr(self) -> crate::common::Reg<regs::Cr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+    }
+    #[doc = "CSR"]
+    #[inline(always)]
+    pub const fn csr(self) -> crate::common::Reg<regs::Csr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
 }
-#[doc = "CR (rw) register accessor: CR\n\nYou can [`read`](crate::Reg::read) this register and get [`cr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`cr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@cr`] module"]
-#[doc(alias = "CR")]
-pub type Cr = crate::Reg<cr::CrSpec>;
-#[doc = "CR"]
-pub mod cr;
-#[doc = "CSR (rw) register accessor: CSR\n\nYou can [`read`](crate::Reg::read) this register and get [`csr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`csr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@csr`] module"]
-#[doc(alias = "CSR")]
-pub type Csr = crate::Reg<csr::CsrSpec>;
-#[doc = "CSR"]
-pub mod csr;
+pub mod regs;

@@ -1,39 +1,33 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    dr: Dr,
-    idr: Idr,
-    cr: Cr,
+#[doc = "CRC calculation unit"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Crc {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - Data register"]
+unsafe impl Send for Crc {}
+unsafe impl Sync for Crc {}
+impl Crc {
     #[inline(always)]
-    pub const fn dr(&self) -> &Dr {
-        &self.dr
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
     }
-    #[doc = "0x04 - Independent data register"]
     #[inline(always)]
-    pub const fn idr(&self) -> &Idr {
-        &self.idr
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
     }
-    #[doc = "0x08 - Control register"]
+    #[doc = "Data register"]
     #[inline(always)]
-    pub const fn cr(&self) -> &Cr {
-        &self.cr
+    pub const fn dr(self) -> crate::common::Reg<regs::Dr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
+    }
+    #[doc = "Independent data register"]
+    #[inline(always)]
+    pub const fn idr(self) -> crate::common::Reg<regs::Idr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
+    }
+    #[doc = "Control register"]
+    #[inline(always)]
+    pub const fn cr(self) -> crate::common::Reg<regs::Cr, crate::common::W> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
     }
 }
-#[doc = "DR (rw) register accessor: Data register\n\nYou can [`read`](crate::Reg::read) this register and get [`dr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`dr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@dr`] module"]
-#[doc(alias = "DR")]
-pub type Dr = crate::Reg<dr::DrSpec>;
-#[doc = "Data register"]
-pub mod dr;
-#[doc = "IDR (rw) register accessor: Independent data register\n\nYou can [`read`](crate::Reg::read) this register and get [`idr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`idr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@idr`] module"]
-#[doc(alias = "IDR")]
-pub type Idr = crate::Reg<idr::IdrSpec>;
-#[doc = "Independent data register"]
-pub mod idr;
-#[doc = "CR (w) register accessor: Control register\n\nYou can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`cr::W`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@cr`] module"]
-#[doc(alias = "CR")]
-pub type Cr = crate::Reg<cr::CrSpec>;
-#[doc = "Control register"]
-pub mod cr;
+pub mod regs;

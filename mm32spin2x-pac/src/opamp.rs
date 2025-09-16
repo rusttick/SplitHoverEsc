@@ -1,17 +1,23 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    opamp_csr: OpampCsr,
+#[doc = "Operational Amplifier"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Opamp {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - OPAMP_CSR"]
+unsafe impl Send for Opamp {}
+unsafe impl Sync for Opamp {}
+impl Opamp {
     #[inline(always)]
-    pub const fn opamp_csr(&self) -> &OpampCsr {
-        &self.opamp_csr
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
+    }
+    #[inline(always)]
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
+    }
+    #[doc = "OPAMP_CSR"]
+    #[inline(always)]
+    pub const fn opamp_csr(self) -> crate::common::Reg<regs::OpampCsr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
 }
-#[doc = "OPAMP_CSR (rw) register accessor: OPAMP_CSR\n\nYou can [`read`](crate::Reg::read) this register and get [`opamp_csr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`opamp_csr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@opamp_csr`] module"]
-#[doc(alias = "OPAMP_CSR")]
-pub type OpampCsr = crate::Reg<opamp_csr::OpampCsrSpec>;
-#[doc = "OPAMP_CSR"]
-pub mod opamp_csr;
+pub mod regs;

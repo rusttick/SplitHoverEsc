@@ -1,61 +1,43 @@
-#[repr(C)]
-#[doc = "Register block"]
-pub struct RegisterBlock {
-    kr: Kr,
-    pr: Pr,
-    rlr: Rlr,
-    sr: Sr,
-    cr: Cr,
+#[doc = "Independent watchdog"]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Iwdg {
+    ptr: *mut u8,
 }
-impl RegisterBlock {
-    #[doc = "0x00 - Key register"]
+unsafe impl Send for Iwdg {}
+unsafe impl Sync for Iwdg {}
+impl Iwdg {
     #[inline(always)]
-    pub const fn kr(&self) -> &Kr {
-        &self.kr
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
     }
-    #[doc = "0x04 - Prescaler register"]
     #[inline(always)]
-    pub const fn pr(&self) -> &Pr {
-        &self.pr
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
     }
-    #[doc = "0x08 - Reload register"]
+    #[doc = "Key register"]
     #[inline(always)]
-    pub const fn rlr(&self) -> &Rlr {
-        &self.rlr
+    pub const fn kr(self) -> crate::common::Reg<regs::Kr, crate::common::W> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0usize) as _) }
     }
-    #[doc = "0x0c - Status register"]
+    #[doc = "Prescaler register"]
     #[inline(always)]
-    pub const fn sr(&self) -> &Sr {
-        &self.sr
+    pub const fn pr(self) -> crate::common::Reg<regs::Pr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x04usize) as _) }
     }
-    #[doc = "0x10 - Control register"]
+    #[doc = "Reload register"]
     #[inline(always)]
-    pub const fn cr(&self) -> &Cr {
-        &self.cr
+    pub const fn rlr(self) -> crate::common::Reg<regs::Rlr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x08usize) as _) }
+    }
+    #[doc = "Status register"]
+    #[inline(always)]
+    pub const fn sr(self) -> crate::common::Reg<regs::Sr, crate::common::R> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x0cusize) as _) }
+    }
+    #[doc = "Control register"]
+    #[inline(always)]
+    pub const fn cr(self) -> crate::common::Reg<regs::Cr, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.wrapping_add(0x10usize) as _) }
     }
 }
-#[doc = "KR (w) register accessor: Key register\n\nYou can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`kr::W`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@kr`] module"]
-#[doc(alias = "KR")]
-pub type Kr = crate::Reg<kr::KrSpec>;
-#[doc = "Key register"]
-pub mod kr;
-#[doc = "PR (rw) register accessor: Prescaler register\n\nYou can [`read`](crate::Reg::read) this register and get [`pr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`pr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@pr`] module"]
-#[doc(alias = "PR")]
-pub type Pr = crate::Reg<pr::PrSpec>;
-#[doc = "Prescaler register"]
-pub mod pr;
-#[doc = "RLR (rw) register accessor: Reload register\n\nYou can [`read`](crate::Reg::read) this register and get [`rlr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`rlr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@rlr`] module"]
-#[doc(alias = "RLR")]
-pub type Rlr = crate::Reg<rlr::RlrSpec>;
-#[doc = "Reload register"]
-pub mod rlr;
-#[doc = "SR (r) register accessor: Status register\n\nYou can [`read`](crate::Reg::read) this register and get [`sr::R`]. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@sr`] module"]
-#[doc(alias = "SR")]
-pub type Sr = crate::Reg<sr::SrSpec>;
-#[doc = "Status register"]
-pub mod sr;
-#[doc = "CR (rw) register accessor: Control register\n\nYou can [`read`](crate::Reg::read) this register and get [`cr::R`]. You can [`reset`](crate::Reg::reset), [`write`](crate::Reg::write), [`write_with_zero`](crate::Reg::write_with_zero) this register using [`cr::W`]. You can also [`modify`](crate::Reg::modify) this register. See [API](https://docs.rs/svd2rust/#read--modify--write-api).\n\nFor information about available fields see [`mod@cr`] module"]
-#[doc(alias = "CR")]
-pub type Cr = crate::Reg<cr::CrSpec>;
-#[doc = "Control register"]
-pub mod cr;
+pub mod regs;
