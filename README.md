@@ -1,4 +1,4 @@
-# split-hover-esc
+# XXX BROKEN XXX GO AWAY! XXX
 
 Repurpose Split Hoverboard PCBs as Speed Controllers for PMSMs and BLDCs
 
@@ -20,7 +20,7 @@ Follow the existing guides to setup an embedded development environment in rust:
 - embassy hello world: https://github.com/embassy-rs/embassy/blob/main/examples/stm32f1/src/bin/blinky.rs
 - embassy... something about sleep requires "probe-rs --connect-under-reset" for stm32f103
   make sure your st link has a working nrst pin. mine did not.
-
+  https://chauquest.com/index.php/article/why-your-st-link-v2-reset-doesnt-work-and-how-to-fix-it/
 
 # Build
 
@@ -56,6 +56,9 @@ cargo rb hello
 - https://doc.rust-lang.org/stable/rust-by-example/
 - https://tourofrust.com
 - embassy-boot: https://blog.drogue.io/firmware-updates-part-1/
+- https://github.com/cmsis-svd/cmsis-svd-data/tree/main/data
+
+
 
 github search for rust FOC projects:
 
